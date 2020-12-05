@@ -62,8 +62,12 @@ var timeCheck = function() {
   }
 };
 
-// update time blocks and date every 15 minutes
-setInterval(addCurrentDate, (1000*60) * 15);
+// update time blocks and date every top of the hour
+setInterval(function(){
+  if((moment().format('mm.ss')) === '00.00') {
+    addCurrentDate;
+  }
+}, 500);
 
 // on click of any save button get all tasks in time blocks and save them to local storage
 $(".saveBtn").on("click", function() {
