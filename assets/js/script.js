@@ -23,7 +23,7 @@ var addCurrentDate = function() {
     var todayDate =  moment();
     
     //display variable in the empty p tag with id of 'currentDay'
-    $("#currentDay").append(todayDate.format('MMM. Do, YYYY'));
+    $("#currentDay").append(todayDate.format('MMMM Do, YYYY'));
 
     //run function to show colored times
     timeCheck();
