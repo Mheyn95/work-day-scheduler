@@ -1,5 +1,3 @@
-
-
 var addCurrentDate = function() {
     // create variable to hold current date
     var todayDate =  moment();
@@ -7,6 +5,7 @@ var addCurrentDate = function() {
     //display variable in the empty p tag with id of 'currentDay'
     $("#currentDay").append(todayDate.format('MMM. Do, YYYY'));
 
+    //run function to show colored times
     timeCheck();
 };
 
@@ -14,6 +13,7 @@ var timeCheck = function() {
   // get current time
   var timeNow = parseInt(moment().format('H'));
   
+  // create new array to store id numbers
   var childArray = [];
   
   // get array of all ids in child elements of container div
@@ -24,36 +24,33 @@ var timeCheck = function() {
   // Remove item 'undefined' from array
   childArray = childArray.filter(function(e) { return e !== undefined })
 
-  // compare to times in grid
+  // compare to times in grid and add background colors to task text area
   for (i = 0; i < childArray.length; i++) {
     var timeId = parseInt(childArray[i]);
 
     if(timeId === timeNow) {
-      $('.' + timeId).addClass("bg-danger");
+      $('.' + timeId).addClass("present");
     }
     else if (timeId < timeNow) {
-      $('.' + timeId).addClass("bg-secondary");
+      $('.' + timeId).addClass("past");
     }
-    else {
-      $('.' + timeId).addClass("bg-success");
+    else if (timeId > timeNow) {
+      $('.' + timeId).addClass("future");
     }
 
   }
-}
+};
+
+setInterval(timeCheck, (1000*60) * 15);
+
 
 
 
 $(".task-input").on("click", function() {
 
-  var text = $(this).find("p")
-    .text()
-    .trim();
+  // open text box for user to input task text
 
-  var textInput = $("<textarea>")
-    .addClass("form-control")
-    .val(text);
-  
-  $(this).replaceWith(textInput);
+
 });
 
 addCurrentDate();
