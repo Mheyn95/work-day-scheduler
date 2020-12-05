@@ -62,10 +62,10 @@ var timeCheck = function() {
   }
 };
 
-// update time blocks and date every top of the hour
+// refresh page at the top of the hour
 setInterval(function(){
   if((moment().format('mm.ss')) === '00.00') {
-    addCurrentDate;
+    location.reload(true);
   }
 }, 500);
 
