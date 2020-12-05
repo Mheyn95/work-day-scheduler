@@ -65,14 +65,14 @@ textarea{
   color: white;
 }
 
-.saveBtn i {
+/* .saveBtn i {
   font-size: 200%;
   margin-top: 30%;
-}
+} */
 
 
 .saveBtn i:hover {
-  font-size: 240%;
+  font-size: 20px;
   transition: all .3s ease-in-out;
 }
 

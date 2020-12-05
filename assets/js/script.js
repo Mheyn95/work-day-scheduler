@@ -1,4 +1,24 @@
+//load tasks from local storage and input them in their correct time blocks
+var loadTasks = function() {
+  // get tasks from local storage
+  var taskArray = localStorage.getItem('tasks');
+  taskArray = JSON.parse(taskArray);
+
+  // push tasks onto page
+  for (i = 0; i < taskArray.length; i++) {
+    var text = taskArray[i].text;
+    $('.' + (i + 9)).val(text);
+  }
+
+  // run function to popuklat page
+  addCurrentDate();
+}
+
+//push current date into jumbotron
 var addCurrentDate = function() {
+    // clear out current date
+    $("#currentDay").empty();
+  
     // create variable to hold current date
     var todayDate =  moment();
     
@@ -9,6 +29,7 @@ var addCurrentDate = function() {
     timeCheck();
 };
 
+//get colors for time blocks depending on current time
 var timeCheck = function() {
   // get current time
   var timeNow = parseInt(moment().format('H'));
@@ -41,17 +62,28 @@ var timeCheck = function() {
   }
 };
 
-setInterval(timeCheck, (1000*60) * 15);
+// update time blocks and date every 15 minutes
+setInterval(addCurrentDate, (1000*60) * 15);
 
+// on click of any save button get all tasks in time blocks and save them to local storage
+$(".saveBtn").on("click", function() {
 
+  // initiate an array to hold the current tasks
+  var taskArray = [];
+  
+  // push all task objects into taskArray
+  for (i = 9; i < 18; i++) {
+    var text = $('.' + i).val();
+    taskArray.push({
+      id: parseInt(i),
+      text: text
+    });
+  }
 
-
-$(".task-input").on("click", function() {
-
-  // open text box for user to input task text
-
+  // set taskArray in local storage
+  localStorage.setItem('tasks', JSON.stringify(taskArray));
 
 });
 
-addCurrentDate();
+loadTasks();
   
