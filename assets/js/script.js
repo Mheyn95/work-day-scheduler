@@ -10,7 +10,7 @@ var loadTasks = function() {
     $('.' + (i + 9)).val(text);
   }
 
-  // run function to popuklat page
+  // run function to populate page
   addCurrentDate();
 }
 
@@ -89,5 +89,6 @@ $(".saveBtn").on("click", function() {
 
 });
 
+// initialize funciton to load tasks on page open, which will then call other functions to open the rest of the page
 loadTasks();
   
